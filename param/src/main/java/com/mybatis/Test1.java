@@ -136,7 +136,7 @@ public class Test1 {
     public void testInsertUser2(){
         SqlSession sqlSession = SqlSessionUtil.getSqlSession();
         SelectMapper mapper = sqlSession.getMapper(SelectMapper.class);
-        User user = new User(null, "xxxx", "123456", 11, "M", "test@gmail.com");
+        User user = new User(null, "yyyyy", "123456", 11, "M", "test@gmail.com");
         mapper.insertUser(user);
         System.out.println(user);
         sqlSession.close();
