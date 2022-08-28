@@ -1,28 +1,58 @@
-package com.mybatis.com.mybatis;
+package com.mybatis;
 
-import com.mybatis.com.mybatis.mapper.UserMapper;
-import com.mybatis.com.mybatis.pojo.User;
-import org.apache.ibatis.io.Resources;
+import com.mybatis.mapper.UserMapper;
+import com.mybatis.pojo.User;
+import com.mybatis.utils.SqlSessionUtil;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.util.List;
 
 public class Test1 {
     @Test
     public void testInsert() throws IOException {
-        InputStream resourceAsStream = Resources.getResourceAsStream("mybatis-config.xml");
-
-        SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
-        SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBuilder.build(resourceAsStream);
-        SqlSession sqlSession = sqlSessionFactory.openSession();
+        SqlSession sqlSession = SqlSessionUtil.getSqlSession();
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        // int rows = sqlSession.insert("com.mybatis.mapper.UserMapper.insertUser2");
         int rows = mapper.insertUser();
         System.out.println("rows: " + rows);
 
+        // sqlSession.commit();
+        sqlSession.close();
+    }
+
+    @Test
+    public void testUpdate(){
+        SqlSession sqlSession = SqlSessionUtil.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        mapper.updateUser();
+        sqlSession.close();
+    }
+
+    @Test
+    public void testDelete(){
+        SqlSession sqlSession = SqlSessionUtil.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        mapper.deleteUser();
+        sqlSession.close();
+    }
+
+    @Test
+    public void testGetUserById(){
+        SqlSession sqlSession = SqlSessionUtil.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        User user = mapper.getUserById();
+        System.out.println(user);
+        sqlSession.close();
+    }
+
+    @Test
+    public void testGetAllUser(){
+        SqlSession sqlSession = SqlSessionUtil.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        List<User> users = mapper.getAllUser();
+        users.forEach(System.out::println);
         sqlSession.close();
     }
 }

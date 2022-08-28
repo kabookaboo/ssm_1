@@ -21,7 +21,6 @@
         </environment>
 
 
-
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
@@ -33,8 +32,8 @@ serverTimezone=UTC"/>
             </dataSource>
         </environment>
     </environments>
-    
+
     <mappers>
-          <package name="com.mybatis.mapper"/>
+        <package name="com.mybatis.mapper"/>
     </mappers>
 </configuration>

@@ -1,4 +1,4 @@
-package com.mybatis.com.mybatis.pojo;
+package com.mybatis.pojo;
 
 public class User {
     private Integer id;
